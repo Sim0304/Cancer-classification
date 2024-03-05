@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- <title>Welcome to Breast Cancer Classification Prediction App</title> -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-homepage.css') }}">
+    <style>
+        /* Adjust the width of form elements to 33% */
+        .input-group {
+            width: 33%;
+            display: inline-block;
+            margin-right: 2%;
+        }
+        .input-group:last-child {
+            margin-right: 0;
+        }
+
+        
+            
+    </style>
+    <!-- Plotly.js for Chart Visualizations -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- D3.js for Data Loading and Processing -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    
+</head>
+<body>
+    <div class="sticky-header">
+        <header>
+            <h1>Breast Cancer Classification Prediction App</h1>
+        </header>
+    </div>
+    <section>
+        <h2>Breast Cancer Statics Check</h2>
+        <p>
+            Please input the features and statistical measurements of the Cancer.
+        </p>
+        <form id="check-form" method="GET" action="/predict">
+            <h3>Breast Cancer Mean Values</h3>
+            <div class="input-group">
+                <label for="radius1">Radius Mean:</label>
+                <input type="float" id="radius1" name="radius1" required>
+            </div>
+            <div class="input-group">
+                <label for="texture1">Texture Mean:</label>
+                <input type="float" id="texture1" name="texture1" required>
+            </div>
+            <div class="input-group">
+                <label for="perimeter1">Perimeter Mean:</label>
+                <input type="float" id="perimeter1" name="perimeter1" required>
+            </div>
+            <div class="input-group">
+                <label for="area1">Area Mean:</label>
+                <input type="float" id="area1" name="area1" required>
+            </div>
+            <div class="input-group">
+                <label for="smoothness1">Smoothness Mean:</label>
+                <input type="float" id="smoothness1" name="smoothness1" required>
+            </div>
+            <div class="input-group">
+                <label for="compactness1">Compactness Mean:</label>
+                <input type="float" id="compactness1" name="compactness1" required>
+            </div>
+            <div class="input-group">
+                <label for="concavity1">Concavity Mean:</label>
+                <input type="float" id="concavity1" name="concavity1" required>
+            </div>
+            <div class="input-group">
+                <label for="concave_points1">Convave Points Mean:</label>
+                <input type="float" id="concave_points1" name="concave_points1" required>
+            </div>
+            <div class="input-group">
+                <label for="symmetry1">Symmetry Mean:</label>
+                <input type="float" id="symmetry1" name="symmetry1" required>
+            </div>
+            <div class="input-group">
+                <label for="fractal_dimension1">Fractual Dimension Mean:</label>
+                <input type="float" id="fractal_dimension1" name="fractal_dimension1" required>
+            </div>
+            <h3>Breast Cancer Standard Error</h3>
+            <div class="input-group">
+                <label for="radius2">Radius Standard Error:</label>
+                <input type="float" id="radius2" name="radius2" required>
+            </div>
+            <div class="input-group">
+                <label for="texture2">Texture Standard Error:</label>
+                <input type="float" id="texture2" name="texture2" required>
+            </div>
+            <div class="input-group">
+                <label for="perimeter2">Perimeter Standard Error:</label>
+                <input type="float" id="perimeter2" name="perimeter2" required>
+            </div>
+            <div class="input-group">
+                <label for="area2">Area Standard Error:</label>
+                <input type="float" id="area2" name="area2" required>
+            </div>
+            <div class="input-group">
+                <label for="smoothness1">Smoothness Standard Error:</label>
+                <input type="float" id="smoothness1" name="smoothness1" required>
+            </div>
+            <div class="input-group">
+                <label for="compactness2">Compactness Standard Error:</label>
+                <input type="float" id="compactness2" name="compactness2" required>
+            </div>
+            <div class="input-group">
+                <label for="concavity2">Concavity Standard Error:</label>
+                <input type="float" id="concavity2" name="concavity2" required>
+            </div>
+            <div class="input-group">
+                <label for="concave_points2">Concave Points Standard Error:</label>
+                <input type="float" id="concave_points2" name="concave_points2" required>
+            </div>
+            <div class="input-group">
+                <label for="symmetry2">Symmetry Standard Error:</label>
+                <input type="float" id="symmetry2" name="symmetry2" required>
+            </div>
+            <div class="input-group">
+                <label for="fractal_dimension2">Fractual Dimension Standard Error:</label>
+                <input type="float" id="fractal_dimension2" name="fractal_dimension2" required>
+            </div>
+            <h3>Breast Cancer Largest Mean</h3>
+            <div class="input-group">
+                <label for="radius3">Radius Worst/Largest Mean:</label>
+                <input type="float" id="radius3" name="radius3" required>
+            </div>
+            <div class="input-group">
+                <label for="texture3">Texture Worst/Largest Mean:</label>
+                <input type="float" id="texture3" name="texture3" required>
+            </div>
+            <div class="input-group">
+                <label for="perimeter3">Perimeter Worst/Largest Mean:</label>
+                <input type="float" id="perimeter3" name="perimeter3" required>
+            </div>
+            <div class="input-group">
+                <label for="area3">Area Worst/Largest Mean:</label>
+                <input type="float" id="area3" name="area3" required>
+            </div>
+            <div class="input-group">
+                <label for="smoothness3">Smoothness Worst/Largest Mean:</label>
+                <input type="float" id="smoothness3" name="smoothness3" required>
+            </div>
+            <div class="input-group">
+                <label for="compactness3">Compactness Worst/Largest Mean:</label>
+                <input type="float" id="compactness3" name="compactness3" required>
+            </div>
+            <div class="input-group">
+                <label for="concavity3">Concavity Worst/Largest Mean:</label>
+                <input type="float" id="concavity3" name="concavity3" required>
+            </div>
+            <div class="input-group">
+                <label for="concave_points3">Convave Points Worst/Largest Mean:</label>
+                <input type="float" id="concave_points3" name="concave_points3" required>
+            </div>
+            <div class="input-group">
+                <label for="symmetry3">Symmetry Worst/Largest Mean:</label>
+                <input type="float" id="symmetry3" name="symmetry3" required>
+            </div>
+            <div class="input-group">
+                <label for="fractal_dimension3">Fractual Dimension Worst/Largest Mean:</label>
+                <input type="float" id="fractal_dimension3" name="fractal_dimension3" required>
+            </div>
+            <button type="submit">Submit Results</button>
+        </form>
+        <!-- Display prediction result here -->
+        <div id="prediction-result"  class="{{ 'result-loyal' if result_status == 'loyal' else 'result-not-loyal' if result_status else 'result-not-ready' }}"
+        style="margin-top: 20px;">
+            {{prediction_text}}
+        </div>
+
+
+        <!-- Display input summary here -->
+        <div class="input-summary" id="input-summary">
+            <h4>Input Summary</h4>
+            <pre id="summary-content">{{ input_summary|safe }}</pre>
+        </div>
+
+        <!-- Clear Button -->
+        <button id="clear-button">Clear Results</button>
+
+        <script src="{{ url_for('static', filename='js/ClearContent.js') }}"></script>
+
+    </section>
+
+</body>
+</html>
